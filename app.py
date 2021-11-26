@@ -13,10 +13,12 @@ def get_content():
     url = request.args.get('url', None)
     if not url:
         return "Running"
-    username = os.getenv("PROXYLAND_USER")
-    password = os.getenv("PROXYLAND_PASSWORD")
+    username = os.getenv("PROXY_USER")
+    password = os.getenv("PROXY_PASSWORD")
+    endpoint = os.getenv("PROXY_ENDPOINT")
+    port = os.getenv("PROXY_PORT")
 
-    proxy = ('http://%s:%s@server.proxyland.io:9090' % (username, password))
+    proxy = (f'http://{username}:{password}@{endpoint}:{port}')
 
     query = urllib.request.build_opener(urllib.request.ProxyHandler({ 'http': proxy }))
 
